@@ -11,6 +11,6 @@ Python script to control an OmronTM robot with GCode using the Omron listen node
 7. Run the Python script
 
 # Advanced use
-The Python script can be used as a module by other scripts. Copy the format in the `__main__` section at the bottom of the script.
+The Python script can be used as a module - use the format in the `__main__` section at the bottom of the script as a guide.
 
 There is a method named `ExtruderAxis()` in the `Line` class. This method controls what happens when the E axis speed changes. You can edit this function to return whatever you like, just make sure it returns a list of strings that are valid TM expression editor commands, such as `['IO["ControlBox"].DO[0]=0','IO["ControlBox"].DO[7]=0']`. You can access the speed of the E extruder with `self.ESpeed` and use this in the commands such as `[f'IO["ControlBox"].AO[0]={self.ESpeed}']`.

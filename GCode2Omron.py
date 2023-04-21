@@ -98,7 +98,8 @@ class Line:
         # y and z axes are negative because datum from landmark is upside-down. Flip make these positive if datum is the right way up
         return f'PLine("CAP",{self.Values[X]},{-self.Values[Y]},{-self.Values[Z]},{self.Values[A]},{self.Values[B]},{self.Values[C]},{int(self.Values[F]/60.0)},{self.AcelTime},{self.Blend})'
     
-    def ExtruderAxis(self): # function called whenever the speed of the E axis changes. Return a list of commands for the robot. These can be based on the current speed by accessing self.ESpeed
+    def ExtruderAxis(self): #USER_EDIT
+        # function called whenever the speed of the E axis changes. Return a list of commands for the robot. These can be based on the current speed by accessing self.ESpeed
         if self.ESpeed > 0:
             return [f'IO["ControlBox"].DO[0]=0',f'IO["ControlBox"].DO[7]=0']
         else:
@@ -118,8 +119,6 @@ class GCode2Omron:
         self.IP_address = IP_address
 
         print("Connecting to robot...")
-        #TM robot listen node commands are listed in 'expression editor and listen node manual'
-        #IP  address must be set on TM robot / system / network / Local Area Conn 2 / Static IP / IP address: 10.18.0.22 / Subnet mask: 255.255.0.0
         self.nc = nclib.Netcat((self.IP_address, 5890),udp=False,verbose=False)
         print("Robot connected")
 
@@ -200,22 +199,25 @@ class GCode2Omron:
 
 
 if __name__ == "__main__":
-    IP_address = '192.168.1.3' # address of Omron robot
-    GCode_file_path = r'run.gcode' # file path of gcode file
-    Wait_for_response = False # wait for response from robot before sending the next command
+    #TM robot listen node commands are listed in 'expression editor and listen node manual'
+    #IP  address must be set on TM robot / system / network / Local Area Conn 2 / Static IP / IP address: 10.18.0.22 / Subnet mask: 255.255.0.0
 
-    AcelTime = 50 # Time taken to accelerate to full speed (s)
-    Blend = 10 # percentage blend for each linear move (%)
-    InitialF = 600 # default feed rate until a feed rate is specified in GCode (mm/min)
+    IP_address = '192.168.1.3' #USER_EDIT # address of Omron robot
+    GCode_file_path = r'run.gcode' #USER_EDIT # file path of gcode file
+    Wait_for_response = False #USER_EDIT # wait for response from robot before sending the next command
 
-    HeaderCommands = [
+    AcelTime = 50 #USER_EDIT # Time taken to accelerate to full speed (s)
+    Blend = 10 #USER_EDIT # percentage blend for each linear move (%)
+    InitialF = 600 #USER_EDIT # default feed rate until a feed rate is specified in GCode (mm/min)
+
+    HeaderCommands = [ #USER_EDIT
         'StopAndClearBuffer()',
         'IO["ControlBox"].DO[0]=1',
         'IO["ControlBox"].DO[7]=1',
         'ChangeBase("vision_Datum")'
     ]
 
-    FooterCommands = [
+    FooterCommands = [ #USER_EDIT
         'IO["ControlBox"].DO[0]=1',
         'IO["ControlBox"].DO[7]=1'
     ]

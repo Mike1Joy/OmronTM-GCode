@@ -7,7 +7,7 @@ Python script to control an OmronTM robot with GCode using the Omron listen node
 3. Download the Python script onto your computer.
 4. Change parameters as desired. All parameters that are recommended to be edited are marked with `#USER_EDIT` in the script.
 5. Connect the computer to the robot with an ethernet connection making sure firewalls etc are not going to interrupt the connection.
-6. Generate / make a GCode file, place the file in the same folder as the python script and rename it to "run.gcode". Alternatively, edit the GCode_file_path variable in the script to match the location of the file.
+6. Generate / make a GCode file, place the file in the same folder as the python script and rename it to "run.gcode". Alternatively, edit the `GCode_file_path` variable in the script to match the location of the file.
 7. Run the Python script
 
 # Advanced use
